@@ -4,8 +4,6 @@ from . import models
 
 
 class WarehouseSerializer(serializers.ModelSerializer):
-
-
     class Meta:
         model = models.Warehouse
         fields = ["address", "items"]

@@ -2,7 +2,7 @@ from os import listdir
 
 from django.conf import settings
 
-from apps.menu import views
+from apps.common import views
 
 
 class MenuView(views.MenuView):

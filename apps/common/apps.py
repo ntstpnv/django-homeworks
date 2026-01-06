@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MenuConfig(AppConfig):
-    name = "apps.menu"
+class CommonConfig(AppConfig):
+    name = "apps.common"
     verbose_name = "_"

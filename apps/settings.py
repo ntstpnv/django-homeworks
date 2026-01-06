@@ -10,10 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os
-import re
 from collections import defaultdict, namedtuple
 from pathlib import Path
+from re import compile
 
 from environ import Env
 
@@ -22,7 +21,7 @@ from environ import Env
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = Env()
-Env.read_env(BASE_DIR / ".env")
+Env.read_env(BASE_DIR / "config" / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -48,39 +47,36 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
-    # "rest_framework.authtoken",
 ]
 
 
 def parser():
     pats = [
-        re.compile(r"class (.+?Config)"),
-        re.compile(r'name = "(.+?)"'),
-        re.compile(r'verbose_name = "(.+?)"'),
+        compile(r"class (.+?Config)"),
+        compile(r'name = "(.+?)"'),
+        compile(r'verbose_name = "(.+?)"'),
     ]
 
     groups = set()
     apps = defaultdict(list)
 
-    for root, _, files in os.walk("apps"):
-        if "apps.py" in files:
-            file = os.path.join(root, "apps.py")
-            with open(file, encoding="utf-8") as f:
-                string = f.read()
+    paths = sorted(Path("apps").rglob("apps.py"))
+    for path in paths:
+        string = path.read_text(encoding="utf-8")
 
-            cls, name, verbose_name = [pat.search(string)[1] for pat in pats]
+        class_name, name, verbose_name = [pat.search(string).group(1) for pat in pats]
 
-            INSTALLED_APPS.append(f"{name}.apps.{cls}")
+        INSTALLED_APPS.append(f"{name}.apps.{class_name}")
 
-            if name == "apps.menu":
-                continue
+        if name == "apps.common":
+            continue
 
-            group = os.path.basename(os.path.dirname(root))
-            groups.add(group)
+        group = path.parent.parent.name
+        groups.add(group)
 
-            app = os.path.basename(root)
-            link = LINK(verbose_name, app)
-            apps[group].append(link)
+        app = path.parent.name
+        link = LINK(verbose_name, app)
+        apps[group].append(link)
 
     groups = [LINK(group, group) for group in sorted(groups)]
     return groups, apps
@@ -104,7 +100,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "apps.menu.urls"
+ROOT_URLCONF = "apps.urls"
 
 TEMPLATES = [
     {
@@ -120,8 +116,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = "django_hw.wsgi.application"
 
 
 # Database

@@ -42,9 +42,8 @@
 #### Загрузка тестовых данных:
 
 ```
-python manage.py makemigrations hw2
-python manage.py migrate hw2
-python manage.py loaddata hw2/recipes.json
+python manage.py resetapptables hw2
+python manage.py loaddata apps/fspy/hw2/recipes.json
 ```
 
 #### Схема БД:
@@ -76,8 +75,7 @@ python manage.py loaddata hw2/recipes.json
 #### Загрузка тестовых данных:
 
 ```
-python manage.py makemigrations hw3
-python manage.py migrate hw3
+python manage.py resetapptables hw3
 python manage.py import_phones hw3
 ```
 
@@ -111,9 +109,8 @@ python manage.py import_phones hw3
 #### Загрузка тестовых данных:
 
 ```
-python manage.py makemigrations hw4
-python manage.py migrate hw4
-python manage.py loaddata hw4/articles.json
+python manage.py resetapptables hw4
+python manage.py loaddata apps/fspy/hw4/articles.json
 ```
 
 #### Схема БД:
@@ -146,9 +143,8 @@ python manage.py loaddata hw4/articles.json
 #### Загрузка тестовых данных:
 
 ```
-python manage.py makemigrations hw5
-python manage.py migrate hw5
-python manage.py loaddata hw5/sensors.json
+python manage.py resetapptables hw5
+python manage.py loaddata apps/fspy/hw5/sensors.json
 ```
 
 #### Схема БД:
@@ -167,5 +163,3 @@ python manage.py loaddata hw5/sensors.json
 #### Визуализация:
 
 ![](media/hw5.gif)
-
-переписать весь, структура поменялась
