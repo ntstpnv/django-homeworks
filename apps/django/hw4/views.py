@@ -10,7 +10,7 @@ class MenuView(views.MenuView):
         settings.LINK("Показать новостные статьи", "articles"),
     ]
 
-    back = "fspy"
+    back = "django"
 
 
 class CourseView(views.MenuView):

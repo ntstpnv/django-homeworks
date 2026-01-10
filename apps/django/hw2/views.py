@@ -10,7 +10,7 @@ class MenuView(views.MenuView):
         settings.LINK("Показать кулинарные рецепты", "recipes"),
     ]
 
-    back = "fspy"
+    back = "django"
 
 
 class RecipeListView(views.MenuView):

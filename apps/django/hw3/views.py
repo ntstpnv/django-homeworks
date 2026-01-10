@@ -10,7 +10,7 @@ class MenuView(views.MenuView):
         settings.LINK("Показать каталог смартфонов", "phones"),
     ]
 
-    back = "fspy"
+    back = "django"
 
 
 class PhoneListView(views.MenuView):

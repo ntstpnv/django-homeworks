@@ -10,7 +10,7 @@ class MenuView(views.MenuView):
     template_name = "hw5/sensors.html"
 
     title = "Температурные датчики"
-    back = "fspy"
+    back = "django"
 
     def get_queryset(self):
         return [

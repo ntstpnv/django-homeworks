@@ -9,11 +9,22 @@ from apps.common import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.MenuView.as_view(queryset=settings.GROUPS), name="home"),
+    path(
+        "",
+        views.MenuView.as_view(
+            queryset=settings.GROUPS,
+            title="Выберите модуль",
+        ),
+        name="home",
+    ),
     *[
         path(
             f"{group}/",
-            views.MenuView.as_view(queryset=settings.APPS[group], back="home"),
+            views.MenuView.as_view(
+                queryset=settings.APPS[group],
+                title="Выберите тему",
+                back="home",
+            ),
             name=group,
         )
         for group in settings.APPS

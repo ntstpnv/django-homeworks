@@ -12,7 +12,7 @@ class MenuView(views.MenuView):
     template_name = "hw6/goods.html"
 
     title = "Склады и товары"
-    back = "fspy"
+    back = "django"
 
     def get_queryset(self):
         return {

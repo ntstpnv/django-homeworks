@@ -11,7 +11,7 @@ class MenuView(views.MenuView):
         settings.LINK("Показать рабочую директорию", "workdir"),
     ]
 
-    back = "fspy"
+    back = "django"
 
 
 class CurrentTimeView(views.BaseTemplateView):

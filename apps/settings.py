@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from collections import defaultdict, namedtuple
 from pathlib import Path
-from re import compile
 
 from environ import Env
+
+from .common import constants
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,38 +48,39 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
+    #
+    "apps.common.apps.CommonConfig",
+    #
+    "apps.django.hw1.apps.Hw1Config",
+    "apps.django.hw2.apps.Hw2Config",
+    "apps.django.hw3.apps.Hw3Config",
+    "apps.django.hw4.apps.Hw4Config",
+    "apps.django.hw5.apps.Hw5Config",
+    "apps.django.hw6.apps.Hw6Config",
+    #
+    "apps.html-css.hw9.apps.Hw9Config",
 ]
 
 
 def parser():
-    pats = [
-        compile(r"class (.+?Config)"),
-        compile(r'name = "(.+?)"'),
-        compile(r'verbose_name = "(.+?)"'),
-    ]
-
-    groups = set()
+    groups = []
     apps = defaultdict(list)
 
     paths = sorted(Path("apps").rglob("apps.py"))
     for path in paths:
-        string = path.read_text(encoding="utf-8")
+        group = path.parent.parent.name
 
-        class_name, name, verbose_name = [pat.search(string).group(1) for pat in pats]
-
-        INSTALLED_APPS.append(f"{name}.apps.{class_name}")
-
-        if name == "apps.common":
+        if group == "apps":
             continue
 
-        group = path.parent.parent.name
-        groups.add(group)
+        link = LINK(constants.GROUPS[group], group)
+        if link not in groups:
+            groups.append(link)
 
         app = path.parent.name
-        link = LINK(verbose_name, app)
+        link = LINK(constants.APPS[app], app)
         apps[group].append(link)
 
-    groups = [LINK(group, group) for group in sorted(groups)]
     return groups, apps
 
 
@@ -170,7 +172,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "apps" / "fspy" / "hw4" / "static",
+    BASE_DIR / "apps" / "django" / "hw4" / "static",
+    BASE_DIR / "apps" / "html-css" / "hw9" / "static",
 ]
 
 MEDIA_URL = "/media/"
