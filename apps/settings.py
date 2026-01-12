@@ -172,6 +172,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
+    BASE_DIR / "apps" / "common" / "static",
     BASE_DIR / "apps" / "django" / "hw4" / "static",
     BASE_DIR / "apps" / "html-css" / "hw9" / "static",
 ]
