@@ -11,6 +11,7 @@ class MenuView(views.MenuView):
         settings.LINK("Показать рабочую директорию", "workdir"),
     ]
 
+    title = "Выберите задание"
     back = "django"
 
 

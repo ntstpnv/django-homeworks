@@ -10,7 +10,7 @@ dependencies = [
     "django-filter>=25.2",
     "djangorestframework>=3.16.1",
     "djlint>=1.36.4",
-    "faker>=40.0.1",
+    "faker>=40.1.2",
     "pillow>=12.1.0",
     "psycopg2-binary>=2.9.11",
 ]

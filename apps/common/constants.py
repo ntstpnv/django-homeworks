@@ -1,6 +1,5 @@
 GROUPS = {
     "django": "Django: создание backend-приложений",
-    "html-css": "HTML и CSS: основы веб-верстки",
 }
 
 APPS = {
@@ -10,7 +9,4 @@ APPS = {
     "hw4": "Работа с ORM, 2 часть",
     "hw5": "Знакомство с API на примере Django REST framework",
     "hw6": "CRUD в DRF",
-    "hw7": "",
-    "hw8": "",
-    "hw9": "Введение в верстку",
 }

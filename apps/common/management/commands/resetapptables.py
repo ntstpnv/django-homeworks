@@ -10,7 +10,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("_args", nargs="*")
+        parser.add_argument("arg_list", nargs="*")
 
     def success_msg(self, msg: str) -> None:
         self.stdout.write(f"ОК. {msg}")
@@ -26,7 +26,7 @@ class Command(BaseCommand):
     def check_app_exists(self, app: str) -> str:
         try:
             path = apps.get_app_config(app).path
-            self.success_msg(f"Приложение '{app}' существует")
+            self.success_msg(f"Приложение '{app}' найдено")
             return path
 
         except LookupError:
@@ -67,11 +67,11 @@ class Command(BaseCommand):
     def make_migrations(self, app: str) -> None:
         call_command("makemigrations", app)
         call_command("migrate", app)
-        self.success_msg("Данные обновлены")
+        self.success_msg(f"Данные для '{app}' обновлены")
 
     def handle(self, *args, **options):
-        _args: list[str] = options["_args"]
-        app = self.check_args_number(_args)
+        arg_list = options["arg_list"]
+        app = self.check_args_number(arg_list)
         path = self.check_app_exists(app)
         tables = self.find_tables(app)
         self.drop_tables(tables)

@@ -57,8 +57,6 @@ INSTALLED_APPS = [
     "apps.django.hw4.apps.Hw4Config",
     "apps.django.hw5.apps.Hw5Config",
     "apps.django.hw6.apps.Hw6Config",
-    #
-    "apps.html-css.hw9.apps.Hw9Config",
 ]
 
 
@@ -174,7 +172,6 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "apps" / "common" / "static",
     BASE_DIR / "apps" / "django" / "hw4" / "static",
-    BASE_DIR / "apps" / "html-css" / "hw9" / "static",
 ]
 
 MEDIA_URL = "/media/"
